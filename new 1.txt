@@ -1,0 +1,22 @@
+public HashTable<String, Integer>(int size)
+	Creates an empty table of size 
+	Size must be equal to at least 1
+public int put(String key, int value) - Return current value for said key
+	return -1 if exists
+public contains(String key) - Returns true if key already exists
+public int replace(String key, int value) - Return current value for said key
+	if(contains(key)) {
+		remove key from hashtable
+	}
+	put new key and value in hashtable
+public int get(String key) - Returns current value for sad key
+	hashes the word to be the key
+	returns word count for a specific key
+public boolean remove(String key) 
+	if(contains(key)) {
+		remove it
+		return true
+	}
+	return false
+private int getHashCode(String key) - Returns Integer of hash code
+	returns (sum of the unicode characaters of they key) % size

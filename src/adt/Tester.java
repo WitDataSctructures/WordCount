@@ -24,7 +24,10 @@ public class Tester {
 
 	public static void main(String[] args) {
 		hash = new Hashtable<Integer, String>();
-
+		// public put(String key)
+		// public getValueByKey(String key) - Integer or 0
+		// getHashCode(String key) - Integer that is the hashcode
+		//
 	}
 
 }
