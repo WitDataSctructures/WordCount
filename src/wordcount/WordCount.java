@@ -38,7 +38,7 @@ public class WordCount {
 			hashTableSize = DEFAULT_TABLE_SIZE;
 		}
 		
-		HashTable wordTable = new HashTable();
+		HashTable wordTable = new HashTable<String, Integer>(hashTableSize);
 		
 		while (inputFileName == null){
 			// Show dialog confirming the file name of the input file with the user
@@ -51,9 +51,20 @@ public class WordCount {
 			JOptionPane.showMessageDialog(null, "Error: file, " + inputFileName + " not found.");
 			return;
 		}
-		
-		
+		while (inputStream.hasNext()){
+			String word = inputStream.next();
+			// if the word has punctuation at the end, remove it
+			if (word.endsWith(".") || word.endsWith(",") || word.endsWith(";") || word.endsWith("!") || word.endsWith("?") || word.endsWith(":")) {
+				word = word.substring(0, word.length() - 1);
+			}
+			if (wordTable.contains(word)){
+				//increment value for word
+			} else {
+				wordTable.put(word, 1);
+			}
+		}
 		inputStream.close();
+		//print each word and number of occurrences
 	}
 
 }
