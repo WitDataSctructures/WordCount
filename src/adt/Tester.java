@@ -20,14 +20,13 @@ import java.util.Hashtable;
 
 public class Tester {
 
-	static Hashtable<Integer, String> hash;
+	static Hashtable<String, Integer> hash;
+	// static HashTable<String, Integer> myHash;
 
 	public static void main(String[] args) {
-		hash = new Hashtable<Integer, String>();
-		// public put(String key)
-		// public getValueByKey(String key) - Integer or 0
-		// getHashCode(String key) - Integer that is the hashcode
-		//
+		hash = new Hashtable<String, Integer>();
+		// myHash = new HashTable<String, Integer>();
+
 	}
 
 }
