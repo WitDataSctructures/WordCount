@@ -23,7 +23,7 @@ public class HashTable{
 	//Constructor
 	public HashTable(int s){
 		if(s > 1){
-			size = s;
+			size = getNextPrime(s);
 		}else{
 			size = 1;
 		}
@@ -56,19 +56,54 @@ public class HashTable{
 	
 	public int replace(String key, int value){
 		if(contains(key)){
-			//Replaces key with stated value
-			//setValue(value);
-			return value;
+			int hashCode = getHashCode(key);
+			hashCode %= size;
+			Node currentNode = table[hashCode].getHeadNode();
+					
+			while(currentNode != null){
+				if(currentNode.getKey() == key){
+					currentNode.setValue(value);
+					return value;
+				}
+			}
 		}
 		return 0;
 	}
 	
 	public int get(String key){
+		if(contains(key)){
+			int hashCode = getHashCode(key);
+			hashCode %= size;
+			Node currentNode = table[hashCode].getHeadNode();
+			
+			while(currentNode != null){
+				
+				if(currentNode.getKey() == key){
+					return currentNode.getValue();
+				}
+				currentNode = currentNode.getNextNode();
+			}
+		}
 		return 0;
 	}
 	
 	public int put(String key){
-		return 0;
+		
+		int hashCode = getHashCode(key);
+		hashCode %= size;
+		int value = 0;
+		
+		table[hashCode].add(key);
+		
+		Node currentNode = table[hashCode].getHeadNode();
+		
+		while(currentNode != null){
+			if(currentNode.getKey() == key){
+				value = currentNode.getValue();
+			}
+			currentNode = currentNode.getNextNode();
+		}
+		return value;
 	}
 	
 	public boolean remove(String key){
@@ -98,6 +133,28 @@ public class HashTable{
 		}
 		
 		return unicodeSum;
+	}
+
+	public int getNextPrime(int num){
+		
+		//checks to see if current number is a prime. If it is, return the number
+		for(int i = 2; i < num; i++){
+			if(num%i != 0){
+				return num;
+			}
+		}
+		
+		boolean isPrime = false;
+		int primeHunter = num + 1;
+		//Retrieves next prime number following num.
+		while(isPrime == false){
+			for(int i = 2; i < primeHunter; i++){
+				if(primeHunter%i != 0){
+					isPrime = true;
+				}
+			}
+		}
+		return primeHunter;
 	}
 	
 }
