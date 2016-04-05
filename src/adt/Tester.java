@@ -67,9 +67,27 @@ public class Tester {
 		return putTest;
 	}
 
+	/**
+	 * @return Whether or not the the new hash table was able to properly add keys and values as well as properly print them out
+	 */
+	public boolean test2() {
+		// Testing put and toString();
+		addToBoth("jimmy", 0);
+		addToBoth("bob", 1);
+		addToBoth("joe", 2);
+		addToBoth("smith", 1);
+		boolean putTest = hash.toString().equals(myHash.toString());
+		System.out.println("Testing put() and toString() [" + String.valueOf(putTest).toUpperCase() + "]");
+		if (!putTest) {
+			System.out.println("\tJavaTable: " + hash);
+			System.out.println("\tMyTable  : " + myHash);
+		}
+		return putTest;
+	}
+
 	private void addToBoth(String key, int value) {
 		hash.put(key, value);
-		myHash.put(key);
+		myHash.put(key, value);
 	}
 
 }
