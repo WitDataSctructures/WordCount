@@ -17,6 +17,7 @@ package wordcount;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.Normalizer;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Set;
@@ -61,11 +62,9 @@ public class WordCount {
 				return;
 			}
 			while (inputStream.hasNext()){
-				String word = inputStream.next().trim().toLowerCase();
+				//Gets next word, making all letters lowercase and removing characters that are not letters
+				String word = inputStream.next().trim().toLowerCase().replaceAll("[^\\x61-\\x7A]", "");
 				// if the word has punctuation at the end, remove it
-				if (word.endsWith(".") || word.endsWith(",") || word.endsWith(";") || word.endsWith("!") || word.endsWith("?") || word.endsWith(":")) {
-					word = word.substring(0, word.length() - 1);
-				}
 				if (wordTable.containsKey(word)){
 					Integer count = (Integer) wordTable.get(word);
 					count++;
