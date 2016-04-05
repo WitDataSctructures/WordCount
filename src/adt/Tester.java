@@ -72,7 +72,7 @@ public class Tester {
 		addToBoth("jod", 1);
 		addToBoth("jof", 1);
 		boolean putTest = areTheSame(hash.toString(), myHash.toString());
-		System.out.println("Testing put() and toString()\t[" + String.valueOf(putTest).toUpperCase() + "]");
+		System.out.println("Testing put() and toString()\t\t[" + String.valueOf(putTest).toUpperCase() + "]");
 		if (!putTest) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
@@ -94,7 +94,7 @@ public class Tester {
 		boolean test2 = areTheSame(hash.toString(), myHash.toString());
 		clearBoth();
 		boolean test3 = areTheSame(hash.toString(), myHash.toString());
-		System.out.println("Testing clear()\t\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing clear()\t\t\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
 		if (!test1 || !test2 || !test3) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
@@ -126,9 +126,9 @@ public class Tester {
 			}
 		}
 
-		System.out.println("Testing get(String key)\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
-		System.out.println("Testing contains(String key)\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
-		System.out.println("Testing getHashCode(String key)\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing get(String key)\t\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing contains(String key)\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing getHashCode(String key)\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
 		if (!test1 || !test2 || !test3) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
@@ -158,7 +158,7 @@ public class Tester {
 		removeFromBoth("jimmy");
 		boolean test4 = areTheSame(hash.toString(), myHash.toString());
 
-		System.out.println("Testing remove(String key)\t[" + String.valueOf(test1 && test2 && test3 && test4).toUpperCase() + "]");
+		System.out.println("Testing remove(String key)\t\t[" + String.valueOf(test1 && test2 && test3 && test4).toUpperCase() + "]");
 		if (!test1 || !test2 || !test3 || !test4) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);

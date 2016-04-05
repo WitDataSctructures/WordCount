@@ -16,7 +16,6 @@
 package adt;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HashTable {
 
@@ -68,6 +67,7 @@ public class HashTable {
 					currentNode.setValue(value);
 					return value;
 				}
+				currentNode = currentNode.getNextNode();
 			}
 		}
 		return 0;
@@ -94,10 +94,10 @@ public class HashTable {
 
 		int hashCode = getHashCode(key);
 		hashCode %= size;
-		if(table[hashCode] == null){
+		if (table[hashCode] == null) {
 			table[hashCode] = new LinkedList();
 		}
-		
+
 		table[hashCode].add(key, value);
 
 		return value;
@@ -153,57 +153,58 @@ public class HashTable {
 		}
 		return primeHunter;
 	}
-	
-	public ArrayList<String> getKeys(){
-		
+
+	public ArrayList<String> getKeys() {
+
 		ArrayList<String> keys = new ArrayList<String>();
 		int index = 0;
 		Node currentNode = new Node();
-		
-		for(int i = 0; i < size; i++){
-			if(table[i] == null){
+
+		for (int i = 0; i < size; i++) {
+			if (table[i] == null) {
 				table[i] = new LinkedList();
 			}
 			currentNode = table[i].getHeadNode();
-			while(currentNode != null){
+			while (currentNode != null) {
 				keys.add(currentNode.getKey());
 				currentNode = currentNode.getNextNode();
 				index++;
 			}
 		}
-		//Collections.reverse(keys);
+		// Collections.reverse(keys);
 		return keys;
 	}
-	
-	public String toString(){
+
+	@Override
+	public String toString() {
 		String result = "";
 		ArrayList<String> keys = getKeys();
 		int index = 0;
 		Node currentNode = new Node();
-		
+
 		result += "{";
-		for(int i = 0; i < size; i++){
+		for (int i = 0; i < size; i++) {
 			currentNode = table[i].getHeadNode();
-			while(currentNode != null){
+			while (currentNode != null) {
 				result += currentNode.getKey();
 				result += "=";
 				result += currentNode.getValue();
-				
-				if(currentNode.getNextNode() == null && i < size){
+
+				if (currentNode.getNextNode() == null && i < size) {
 					result += ", ";
 				}
-				
+
 				currentNode = currentNode.getNextNode();
 				index++;
 			}
 		}
 		result += "}";
-		
+
 		return result;
 	}
-	
-	public void clear(){
-		for(int i = 0; i < size; i++){
+
+	public void clear() {
+		for (int i = 0; i < size; i++) {
 			table[i].clear();
 		}
 	}
