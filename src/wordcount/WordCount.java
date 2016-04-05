@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -27,13 +28,13 @@ import javax.swing.JOptionPane;
 public class WordCount {
 	
 	private static final int DEFAULT_TABLE_SIZE = 101;
-	private static final String[] INPUT_FILES = {"american-english-JL.txt",
+	private static final String[] INPUT_FILES = {"input1.txt", "american-english-JL.txt",
 			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables - additional information -- DMR -- 2016-04-03 01.txt",
 			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables -- DMR -- 2015-07-14 01.txt",
 			"the-lancashire-cotton-famine.txt",
-			"wit-attendance-policy.txt",
-			"input1.txt"};
+			"wit-attendance-policy.txt"};
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		Scanner inputStream;
 		String inputFilePath = null;
@@ -51,27 +52,35 @@ public class WordCount {
 		}
 		
 		for (String fileName : INPUT_FILES){
+			@SuppressWarnings("rawtypes")
 			Hashtable wordTable = new Hashtable<String, Integer>(hashTableSize);
 			try {
-				inputStream = new Scanner(new FileInputStream(inputFilePath + fileName));
+				inputStream = new Scanner(new FileInputStream(inputFilePath + fileName), "UTF-8");
 			} catch (FileNotFoundException e) {
 				JOptionPane.showMessageDialog(null, "Error: file, " + inputFilePath + fileName + " not found.");
 				return;
 			}
 			while (inputStream.hasNext()){
-				String word = inputStream.next();
+				String word = inputStream.next().trim().toLowerCase();
 				// if the word has punctuation at the end, remove it
 				if (word.endsWith(".") || word.endsWith(",") || word.endsWith(";") || word.endsWith("!") || word.endsWith("?") || word.endsWith(":")) {
 					word = word.substring(0, word.length() - 1);
 				}
-				if (wordTable.contains(word)){
-					wordTable.replace(word, (Integer) wordTable.get(word) + 1);
+				if (wordTable.containsKey(word)){
+					Integer count = (Integer) wordTable.get(word);
+					count++;
+					wordTable.replace(word, count);
 				} else {
-					//wordTable.put(word, 1);
+					wordTable.put(word, 1);
 				}
 			}
 			inputStream.close();
 			//print each word and number of occurrences
+			Set<String> words = wordTable.keySet();
+			System.out.println("\nWords in " + fileName + ":");
+			for (String word : words){
+				System.out.println(word + " " + wordTable.get(word));
+			}
 		}
 		
 		
