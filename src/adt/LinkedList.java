@@ -79,7 +79,6 @@ public class LinkedList {
 
 		boolean success = false;
 		Node currentNode = head;
-		Node tempNode = null;
 
 		if (contains(word)) {
 			while (currentNode != null) {
