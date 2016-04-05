@@ -33,6 +33,9 @@ public class Tester {
 		if (!test.test2()) {
 			somethingWrong = true;
 		}
+		if (!test.test3()) {
+			somethingWrong = true;
+		}
 
 		// Tests are finished
 		if (somethingWrong) {
@@ -73,7 +76,7 @@ public class Tester {
 	}
 
 	/**
-	 * @return Test Clear
+	 * @return Test clear()
 	 */
 	public boolean test2() {
 		// Testing put and toString();
@@ -87,7 +90,39 @@ public class Tester {
 		boolean test2 = areTheSame(hash.toString(), myHash.toString());
 		clearBoth();
 		boolean test3 = areTheSame(hash.toString(), myHash.toString());
-		System.out.println("Testing clear\t\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing clear()\t\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		if (!test1 || !test2 || !test3) {
+			System.out.println("\tJavaTable: " + hash);
+			System.out.println("\tMyTable  : " + myHash);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @return Test get(String key)
+	 */
+	public boolean test3() {
+		// Testing put and toString();
+		clearBoth();
+		boolean test1 = areTheSame(hash.toString(), myHash.toString());
+		addToBoth("jimmy", 0);
+		addToBoth("bob", 1);
+		addToBoth("joe", 2);
+		addToBoth("jod", 1);
+		addToBoth("jof", 1);
+		boolean test2 = areTheSame(hash.toString(), myHash.toString());
+		int[] vals1 = { hash.get("jimmy"), hash.get("bob"), hash.get("joe"), hash.get("jod"), hash.get("jof") };
+		int[] vals2 = { myHash.get("jimmy"), myHash.get("bob"), myHash.get("joe"), myHash.get("jod"), myHash.get("jof") };
+		boolean test3 = true;
+		for (int i = 0; i < vals1.length; i++) {
+			if (vals1[i] != vals2[i]) {
+				test3 = false;
+				break;
+			}
+		}
+
+		System.out.println("Testing get(String key)\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
 		if (!test1 || !test2 || !test3) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
