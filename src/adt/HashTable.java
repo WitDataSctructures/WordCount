@@ -150,5 +150,21 @@ public class HashTable {
 		}
 		return primeHunter;
 	}
-
+	
+	public String[] getKeys(){
+		
+		String[] keys = new String[size];
+		int index = 0;
+		Node currentNode = new Node();
+		
+		for(int i = 0; i < size; i++){
+			currentNode = table[i].getHeadNode();
+			while(currentNode != null){
+				keys[index] = currentNode.getKey();
+				currentNode = currentNode.getNextNode();
+				index++;
+			}
+		}
+		return keys;
+	}
 }
