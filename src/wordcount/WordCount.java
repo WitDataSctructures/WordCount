@@ -47,7 +47,7 @@ public class WordCount {
 		
 		while (inputFilePath == null){
 			// Show dialog confirming the file name of the input file with the user
-			inputFilePath = JOptionPane.showInputDialog("Enter the path of the input files:", "input_files");
+			inputFilePath = JOptionPane.showInputDialog("Enter the path of the input files:", "");
 		}
 		
 		for (String fileName : INPUT_FILES){
