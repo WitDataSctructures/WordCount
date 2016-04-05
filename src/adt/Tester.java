@@ -16,6 +16,7 @@
 
 package adt;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Tester {
@@ -57,8 +58,9 @@ public class Tester {
 		addToBoth("jimmy", 0);
 		addToBoth("bob", 1);
 		addToBoth("joe", 2);
-		addToBoth("smith", 1);
-		boolean putTest = hash.toString().equals(myHash.toString());
+		addToBoth("jod", 1);
+		addToBoth("jof", 1);
+		boolean putTest = areTheSame(hash.toString(), myHash.toString());
 		System.out.println("Testing put() and toString() [" + String.valueOf(putTest).toUpperCase() + "]");
 		if (!putTest) {
 			System.out.println("\tJavaTable: " + hash);
@@ -75,7 +77,8 @@ public class Tester {
 		addToBoth("jimmy", 0);
 		addToBoth("bob", 1);
 		addToBoth("joe", 2);
-		addToBoth("smith", 1);
+		addToBoth("jod", 1);
+		addToBoth("jof", 1);
 		boolean putTest = hash.toString().equals(myHash.toString());
 		System.out.println("Testing put() and toString() [" + String.valueOf(putTest).toUpperCase() + "]");
 		if (!putTest) {
@@ -88,6 +91,21 @@ public class Tester {
 	private void addToBoth(String key, int value) {
 		hash.put(key, value);
 		myHash.put(key, value);
+	}
+
+	private boolean areTheSame(String result1, String result2) {
+		String[] r1_ = result1.trim().replaceAll("\\{", "").replaceAll(" ", "").split(",");
+		ArrayList<String> r1 = new ArrayList<String>();
+		for (int i = 0; i < r1.size(); i++) {
+			r1.add(r1_[i]);
+		}
+
+		String[] r2_ = result2.trim().replaceAll("\\{", "").replaceAll(" ", "").split(",");
+		ArrayList<String> r2 = new ArrayList<String>();
+		for (int i = 0; i < r2.size(); i++) {
+			r2.add(r2_[i]);
+		}
+		return (r1.containsAll(r2) && r2.containsAll(r1));
 	}
 
 }
