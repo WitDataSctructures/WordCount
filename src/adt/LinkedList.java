@@ -1,3 +1,18 @@
+/****************************
+ * Comp 2071
+ * Lab 05 - Hash Tables
+ * Due: April 5th, 2016
+ * Group #: 12
+ * 
+ * A Hashtable is made up of an array of LinkedLists.
+ * This is a class which defines what makes up a 
+ * LinkedList.
+ * 
+ * @author Jake Mathews
+ * @author Ford Polia
+ * @author Darrien Kennedy
+ */
+
 package adt;
 
 public class LinkedList {
