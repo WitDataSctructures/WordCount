@@ -79,15 +79,16 @@ public class LinkedList {
 		
 		boolean success = false;
 		Node currentNode = head;
-		Node nodeToRemove = null;
+		Node tempNode = null;
 		
 		if(contains(word)){
 			while(currentNode != null){
 				
 				if(currentNode.getKey() == word){
-					nodeToRemove = currentNode;
-					currentNode = nodeToRemove.getNextNode();
-					nodeToRemove = null;
+					tempNode = currentNode.getNextNode();
+					tempNode.setPrevNode(currentNode.getPrevNode());
+					currentNode = null;
+					
 					numberOfEntries--;
 					success = true;
 				}
