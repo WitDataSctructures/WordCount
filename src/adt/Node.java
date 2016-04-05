@@ -17,6 +17,7 @@ package adt;
 
 public class Node {
 	
+	private Node prevNode;
 	private Node nextNode;
 	private String key;
 	private int value;
@@ -47,6 +48,9 @@ public class Node {
 		this.value = val;
 	}
 	
+	public void setPrevNode(Node prev){
+		this.prevNode = prev;
+	}
 	
 	//Getters
 	public Node getNextNode(){
@@ -59,5 +63,9 @@ public class Node {
 	
 	public int getValue(){
 		return this.value;
+	}
+	
+	public Node getPrevNode(){
+		return this.prevNode;
 	}
 }

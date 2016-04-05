@@ -17,16 +17,22 @@ package adt;
 
 public class LinkedList {
 	
+	private Node tail;
 	private Node head;
 	private int numberOfEntries;
 	
 	public LinkedList(){
+		tail = null;
 		head = null;
 		numberOfEntries = 0;
 	}
 	
 	public Node getHeadNode(){
 		return head;
+	}
+	
+	public Node getTailNode() {
+		return tail;
 	}
 	
 	public int getNumberOfEntries(){
@@ -52,22 +58,20 @@ public class LinkedList {
 		//If the word did not already exist in the LinkedList, add it to the end of the list
 		Node nodeToAdd = new Node(word, value);
 		
-		if(head == null){
+		if(head == null) {
 			head = nodeToAdd;
+			tail = head;
+		} else if (tail == head) {
+			tail = nodeToAdd;
+			head.setNextNode(tail);
+			tail.setPrevNode(head);
+		} else {
+			Node temp = tail;
+			tail = nodeToAdd;
+			temp.setNextNode(tail);
+			tail.setPrevNode(temp);
 		}
 		
-		Node currentNode = head;
-		
-		//Checks if word already exists in the LinkedList, if so add one
-		if(contains(word)){
-			currentNode.setValue(currentNode.getValue() + 1);
-			numberOfEntries++;
-			return;
-		}
-		
-		if(head != null){
-			head.setNextNode(nodeToAdd);
-		}
 		numberOfEntries++;
 	}
 	
@@ -97,6 +101,7 @@ public class LinkedList {
 	}
 	
 	public void clear(){
+		tail = null;
 		head = null;
 		numberOfEntries = 0;
 	}
