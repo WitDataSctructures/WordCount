@@ -17,11 +17,12 @@ package wordcount;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import adt.HashTable;
+//import adt.HashTable;
 
 public class WordCount {
 	
@@ -50,7 +51,7 @@ public class WordCount {
 		}
 		
 		for (String fileName : INPUT_FILES){
-			HashTable wordTable = new HashTable(hashTableSize);
+			Hashtable wordTable = new Hashtable<String, Integer>(hashTableSize);
 			try {
 				inputStream = new Scanner(new FileInputStream(inputFilePath + fileName));
 			} catch (FileNotFoundException e) {
@@ -64,7 +65,7 @@ public class WordCount {
 					word = word.substring(0, word.length() - 1);
 				}
 				if (wordTable.contains(word)){
-					wordTable.replace(word, wordTable.get(word) + 1);
+					wordTable.replace(word, (Integer) wordTable.get(word) + 1);
 				} else {
 					//wordTable.put(word, 1);
 				}
