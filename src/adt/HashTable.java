@@ -49,7 +49,7 @@ public class HashTable {
 		
 		while (currentNode != null) {
 
-			if (currentNode.getKey() == key) {
+			if (currentNode.getKey().equals(key)) {
 				return true;
 			}
 
