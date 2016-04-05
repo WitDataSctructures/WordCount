@@ -30,6 +30,9 @@ public class Tester {
 		if (!test.test1()) {
 			somethingWrong = true;
 		}
+		if (!test.test2()) {
+			somethingWrong = true;
+		}
 
 		// Tests are finished
 		if (somethingWrong) {
@@ -61,7 +64,7 @@ public class Tester {
 		addToBoth("jod", 1);
 		addToBoth("jof", 1);
 		boolean putTest = areTheSame(hash.toString(), myHash.toString());
-		System.out.println("Testing put() and toString() [" + String.valueOf(putTest).toUpperCase() + "]");
+		System.out.println("Testing put() and toString()\t[" + String.valueOf(putTest).toUpperCase() + "]");
 		if (!putTest) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
@@ -70,27 +73,37 @@ public class Tester {
 	}
 
 	/**
-	 * @return Whether or not the the new hash table was able to properly add keys and values as well as properly print them out
+	 * @return Test Clear
 	 */
 	public boolean test2() {
 		// Testing put and toString();
+		clearBoth();
+		boolean test1 = areTheSame(hash.toString(), myHash.toString());
 		addToBoth("jimmy", 0);
 		addToBoth("bob", 1);
 		addToBoth("joe", 2);
 		addToBoth("jod", 1);
 		addToBoth("jof", 1);
-		boolean putTest = hash.toString().equals(myHash.toString());
-		System.out.println("Testing put() and toString() [" + String.valueOf(putTest).toUpperCase() + "]");
-		if (!putTest) {
+		boolean test2 = areTheSame(hash.toString(), myHash.toString());
+		clearBoth();
+		boolean test3 = areTheSame(hash.toString(), myHash.toString());
+		System.out.println("Testing clear\t\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		if (!test1 || !test2 || !test3) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
+			return false;
 		}
-		return putTest;
+		return true;
 	}
 
 	private void addToBoth(String key, int value) {
 		hash.put(key, value);
 		myHash.put(key, value);
+	}
+
+	private void clearBoth() {
+		hash.clear();
+		myHash.clear();
 	}
 
 	private boolean areTheSame(String result1, String result2) {
