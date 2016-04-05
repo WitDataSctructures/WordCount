@@ -37,7 +37,7 @@ public class LinkedList {
 		return false;
 	}
 	
-	public void add(String word){
+	public void add(String word, int value){
 
 		Node currentNode = head;
 		
@@ -50,7 +50,7 @@ public class LinkedList {
 		
 		
 		//If the word did not already exist in the LinkedList, add it to the end of the list
-		Node nodeToAdd = new Node(word, 1);
+		Node nodeToAdd = new Node(word, value);
 		
 		if(head != null){
 			head.setNextNode(nodeToAdd);

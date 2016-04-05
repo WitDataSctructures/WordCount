@@ -87,22 +87,13 @@ public class HashTable{
 		return 0;
 	}
 	
-	public int put(String key){
+	public int put(String key, int value){
 		
 		int hashCode = getHashCode(key);
 		hashCode %= size;
-		int value = 0;
 		
-		table[hashCode].add(key);
+		table[hashCode].add(key, value);
 		
-		Node currentNode = table[hashCode].getHeadNode();
-		
-		while(currentNode != null){
-			if(currentNode.getKey() == key){
-				value = currentNode.getValue();
-			}
-			currentNode = currentNode.getNextNode();
-		}
 		return value;
 	}
 	
