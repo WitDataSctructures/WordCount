@@ -36,6 +36,9 @@ public class Tester {
 		if (!test.test3()) {
 			somethingWrong = true;
 		}
+		if (!test.test4()) {
+			somethingWrong = true;
+		}
 
 		// Tests are finished
 		if (somethingWrong) {
@@ -123,7 +126,39 @@ public class Tester {
 		}
 
 		System.out.println("Testing get(String key)\t\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing contains(String key)\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		System.out.println("Testing getHashCode(String key)\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
 		if (!test1 || !test2 || !test3) {
+			System.out.println("\tJavaTable: " + hash);
+			System.out.println("\tMyTable  : " + myHash);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @return Test remove(String key)
+	 */
+	public boolean test4() {
+		// Testing put and toString();
+		addToBoth("jimmy", 0);
+		addToBoth("bob", 1);
+		addToBoth("joe", 2);
+		addToBoth("jod", 1);
+		addToBoth("jof", 1);
+		boolean test1 = areTheSame(hash.toString(), myHash.toString());
+		removeFromBoth("jimmy");
+		removeFromBoth("bob");
+		boolean test2 = areTheSame(hash.toString(), myHash.toString());
+		removeFromBoth("joe");
+		removeFromBoth("jod");
+		removeFromBoth("jof");
+		boolean test3 = areTheSame(hash.toString(), myHash.toString());
+		removeFromBoth("jimmy");
+		boolean test4 = areTheSame(hash.toString(), myHash.toString());
+
+		System.out.println("Testing remove(String key)\t[" + String.valueOf(test1 && test2 && test3 && test4).toUpperCase() + "]");
+		if (!test1 || !test2 || !test3 || !test4) {
 			System.out.println("\tJavaTable: " + hash);
 			System.out.println("\tMyTable  : " + myHash);
 			return false;
@@ -139,6 +174,11 @@ public class Tester {
 	private void clearBoth() {
 		hash.clear();
 		myHash.clear();
+	}
+
+	private void removeFromBoth(String key) {
+		hash.remove(key);
+		myHash.remove(key);
 	}
 
 	private boolean areTheSame(String result1, String result2) {
