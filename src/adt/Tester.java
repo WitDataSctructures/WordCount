@@ -39,6 +39,9 @@ public class Tester {
 		if (!test.test4()) {
 			somethingWrong = true;
 		}
+		if (!test.test5()) {
+			somethingWrong = true;
+		}
 
 		// Tests are finished
 		if (somethingWrong) {
@@ -63,7 +66,6 @@ public class Tester {
 	 * @return Whether or not the the new hash table was able to properly add keys and values as well as properly print them out
 	 */
 	public boolean test1() {
-		// Testing put and toString();
 		addToBoth("jimmy", 0);
 		addToBoth("bob", 1);
 		addToBoth("joe", 2);
@@ -82,7 +84,6 @@ public class Tester {
 	 * @return Test clear()
 	 */
 	public boolean test2() {
-		// Testing put and toString();
 		clearBoth();
 		boolean test1 = areTheSame(hash.toString(), myHash.toString());
 		addToBoth("jimmy", 0);
@@ -140,7 +141,7 @@ public class Tester {
 	 * @return Test remove(String key)
 	 */
 	public boolean test4() {
-		// Testing put and toString();
+		clearBoth();
 		addToBoth("jimmy", 0);
 		addToBoth("bob", 1);
 		addToBoth("joe", 2);
@@ -166,6 +167,34 @@ public class Tester {
 		return true;
 	}
 
+	/**
+	 * @return Test replace(String key, int value)
+	 */
+	public boolean test5() {
+		clearBoth();
+		addToBoth("jimmy", 0);
+		addToBoth("bob", 1);
+		addToBoth("joe", 2);
+		addToBoth("jod", 1);
+		addToBoth("jof", 1);
+		boolean test1 = areTheSame(hash.toString(), myHash.toString());
+		replaceBoth("jimmy", 5);
+		replaceBoth("bob", 4);
+		boolean test2 = areTheSame(hash.toString(), myHash.toString());
+		replaceBoth("joe", 7);
+		replaceBoth("jod", 6);
+		replaceBoth("jof", 34);
+		boolean test3 = areTheSame(hash.toString(), myHash.toString());
+
+		System.out.println("Testing replace(String key, int value)\t[" + String.valueOf(test1 && test2 && test3).toUpperCase() + "]");
+		if (!test1 || !test2 || !test3) {
+			System.out.println("\tJavaTable: " + hash);
+			System.out.println("\tMyTable  : " + myHash);
+			return false;
+		}
+		return true;
+	}
+
 	private void addToBoth(String key, int value) {
 		hash.put(key, value);
 		myHash.put(key, value);
@@ -179,6 +208,11 @@ public class Tester {
 	private void removeFromBoth(String key) {
 		hash.remove(key);
 		myHash.remove(key);
+	}
+
+	private void replaceBoth(String key, int value) {
+		hash.replace(key, value);
+		myHash.replace(key, value);
 	}
 
 	private boolean areTheSame(String result1, String result2) {

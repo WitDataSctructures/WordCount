@@ -16,49 +16,49 @@
 package adt;
 
 public class LinkedList {
-	
+
 	private Node tail;
 	private Node head;
 	private int numberOfEntries;
-	
-	public LinkedList(){
+
+	public LinkedList() {
 		tail = null;
 		head = null;
 		numberOfEntries = 0;
 	}
-	
-	public Node getHeadNode(){
+
+	public Node getHeadNode() {
 		return head;
 	}
-	
+
 	public Node getTailNode() {
 		return tail;
 	}
-	
-	public int getNumberOfEntries(){
+
+	public int getNumberOfEntries() {
 		return numberOfEntries;
 	}
-	
- 	public boolean contains(String word){
-		
+
+	public boolean contains(String word) {
+
 		Node currentNode = head;
-		
-		//Checks the list to see if a word exists as a key in the list.
-		while(currentNode != null){
-			if(currentNode.getKey() == word){
+
+		// Checks the list to see if a word exists as a key in the list.
+		while (currentNode != null) {
+			if (currentNode.getKey() == word) {
 				return true;
 			}
 			currentNode = currentNode.getNextNode();
 		}
 		return false;
 	}
-	
-	public void add(String word, int value){
-		
-		//If the word did not already exist in the LinkedList, add it to the end of the list
+
+	public void add(String word, int value) {
+
+		// If the word did not already exist in the LinkedList, add it to the end of the list
 		Node nodeToAdd = new Node(word, value);
-		
-		if(head == null) {
+
+		if (head == null) {
 			head = nodeToAdd;
 			tail = head;
 		} else if (tail == head) {
@@ -71,40 +71,45 @@ public class LinkedList {
 			temp.setNextNode(tail);
 			tail.setPrevNode(temp);
 		}
-		
+
 		numberOfEntries++;
 	}
-	
-	public boolean remove(String word){
-		
+
+	public boolean remove(String word) {
+
 		boolean success = false;
 		Node currentNode = head;
 		Node tempNode = null;
-		
-		if(contains(word)){
-			while(currentNode != null){
-				
-				if(currentNode.getKey() == word){
-					tempNode = currentNode.getNextNode();
-					tempNode.setPrevNode(currentNode.getPrevNode());
+
+		if (contains(word)) {
+			while (currentNode != null) {
+
+				if (currentNode.getKey() == word) {
+					if (currentNode.getNextNode() != null) {
+						currentNode.getNextNode().setPrevNode(currentNode.getPrevNode());
+					}
+					if (currentNode.getPrevNode() != null) {
+						currentNode.getPrevNode().setNextNode(currentNode.getNextNode());
+					}
+					currentNode.setNextNode(null);
+					currentNode.setPrevNode(null);
 					currentNode = null;
-					
+
 					numberOfEntries--;
 					success = true;
-				}
-				else{
+				} else {
 					currentNode = currentNode.getNextNode();
 				}
 			}
 		}
-		
+
 		return success;
 	}
-	
-	public void clear(){
+
+	public void clear() {
 		tail = null;
 		head = null;
 		numberOfEntries = 0;
 	}
-	
+
 }
