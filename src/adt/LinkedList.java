@@ -83,7 +83,7 @@ public class LinkedList {
 		if (contains(word)) {
 			while (currentNode != null) {
 
-				if (currentNode.getKey() == word) {
+				if (currentNode.getKey().equals(word)) {
 					if (currentNode.getNextNode() != null) {
 						currentNode.getNextNode().setPrevNode(currentNode.getPrevNode());
 					}
