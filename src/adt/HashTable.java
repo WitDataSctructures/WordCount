@@ -91,6 +91,10 @@ public class HashTable {
 
 		int hashCode = getHashCode(key);
 		hashCode %= size;
+		if(table[hashCode] == null){
+			table[hashCode] = new LinkedList();
+		}
+		
 		table[hashCode].add(key, value);
 
 		return value;
