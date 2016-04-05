@@ -25,11 +25,6 @@ public class LinkedList {
 		numberOfEntries = 0;
 	}
 	
-	public LinkedList(Node h){
-		head = h;
-		numberOfEntries = 1;
-	}
-	
 	public Node getHeadNode(){
 		return head;
 	}
@@ -53,7 +48,14 @@ public class LinkedList {
 	}
 	
 	public void add(String word, int value){
-
+		
+		//If the word did not already exist in the LinkedList, add it to the end of the list
+		Node nodeToAdd = new Node(word, value);
+		
+		if(head == null){
+			head = nodeToAdd;
+		}
+		
 		Node currentNode = head;
 		
 		//Checks if word already exists in the LinkedList, if so add one
@@ -63,15 +65,8 @@ public class LinkedList {
 			return;
 		}
 		
-		
-		//If the word did not already exist in the LinkedList, add it to the end of the list
-		Node nodeToAdd = new Node(word, value);
-		
 		if(head != null){
 			head.setNextNode(nodeToAdd);
-		}
-		else{
-			head = nodeToAdd;
 		}
 		numberOfEntries++;
 	}
@@ -100,6 +95,10 @@ public class LinkedList {
 		
 		return success;
 	}
-
+	
+	public void clear(){
+		head = null;
+		numberOfEntries = 0;
+	}
 	
 }
