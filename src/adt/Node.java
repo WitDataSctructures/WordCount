@@ -27,8 +27,7 @@ public class Node {
 		value = 0;
 	}
 	
-	public Node(Node nxt, String ky, int val){
-		nextNode = nxt;
+	public Node(String ky, int val){
 		key = ky;
 		value = val;
 	}
