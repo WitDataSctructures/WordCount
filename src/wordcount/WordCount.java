@@ -17,12 +17,11 @@ package wordcount;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.text.Normalizer;
-import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-
 import javax.swing.JOptionPane;
+
+import adt.HashTable;
 
 //import adt.HashTable;
 
@@ -35,7 +34,6 @@ public class WordCount {
 			"the-lancashire-cotton-famine.txt",
 			"wit-attendance-policy.txt"};
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		Scanner inputStream;
 		String inputFilePath = null;
@@ -53,8 +51,7 @@ public class WordCount {
 		}
 		
 		for (String fileName : INPUT_FILES){
-			@SuppressWarnings("rawtypes")
-			Hashtable wordTable = new Hashtable<String, Integer>(hashTableSize);
+			HashTable wordTable = new HashTable(hashTableSize);
 			try {
 				inputStream = new Scanner(new FileInputStream(inputFilePath + fileName), "UTF-8");
 			} catch (FileNotFoundException e) {
@@ -64,8 +61,7 @@ public class WordCount {
 			while (inputStream.hasNext()){
 				//Gets next word, making all letters lowercase and removing characters that are not letters
 				String word = inputStream.next().trim().toLowerCase().replaceAll("[^\\x61-\\x7A]", "");
-				// if the word has punctuation at the end, remove it
-				if (wordTable.containsKey(word)){
+				if (wordTable.contains(word)){
 					Integer count = (Integer) wordTable.get(word);
 					count++;
 					wordTable.replace(word, count);
@@ -75,7 +71,7 @@ public class WordCount {
 			}
 			inputStream.close();
 			//print each word and number of occurrences
-			Set<String> words = wordTable.keySet();
+			List<String> words = wordTable.getKeys();
 			System.out.println("\nWords in " + fileName + ":");
 			for (String word : words){
 				System.out.println(word + " " + wordTable.get(word));
