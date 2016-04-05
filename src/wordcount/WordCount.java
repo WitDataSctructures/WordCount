@@ -26,45 +26,54 @@ import adt.HashTable;
 public class WordCount {
 	
 	private static final int DEFAULT_TABLE_SIZE = 101;
+	private static final String[] INPUT_FILES = {"american-english-JL.txt",
+			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables - additional information -- DMR -- 2016-04-03 01.txt",
+			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables -- DMR -- 2015-07-14 01.txt",
+			"the-lancashire-cotton-famine.txt",
+			"wit-attendance-policy.txt",
+			"input1.txt"};
 
 	public static void main(String[] args) {
 		Scanner inputStream;
-		String inputFileName = null;
+		String inputFilePath = null;
 		int hashTableSize;
 		
-		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter the name of the input file:", DEFAULT_TABLE_SIZE));
+		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
 		//If the user enters an invalid size for the hash table set it to the default
 		if (hashTableSize < 1){
 			hashTableSize = DEFAULT_TABLE_SIZE;
 		}
 		
-		HashTable wordTable = new HashTable<String, Integer>(hashTableSize);
-		
-		while (inputFileName == null){
+		while (inputFilePath == null){
 			// Show dialog confirming the file name of the input file with the user
-			inputFileName = JOptionPane.showInputDialog("Enter the name of the input file:", ".txt");
+			inputFilePath = JOptionPane.showInputDialog("Enter the path of the input files:", "input_files");
 		}
 		
-		try {
-			inputStream = new Scanner(new FileInputStream(inputFileName));
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Error: file, " + inputFileName + " not found.");
-			return;
-		}
-		while (inputStream.hasNext()){
-			String word = inputStream.next();
-			// if the word has punctuation at the end, remove it
-			if (word.endsWith(".") || word.endsWith(",") || word.endsWith(";") || word.endsWith("!") || word.endsWith("?") || word.endsWith(":")) {
-				word = word.substring(0, word.length() - 1);
+		for (String fileName : INPUT_FILES){
+			HashTable wordTable = new HashTable(hashTableSize);
+			try {
+				inputStream = new Scanner(new FileInputStream(inputFilePath + fileName));
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Error: file, " + inputFilePath + fileName + " not found.");
+				return;
 			}
-			if (wordTable.contains(word)){
-				//increment value for word
-			} else {
-				wordTable.put(word, 1);
+			while (inputStream.hasNext()){
+				String word = inputStream.next();
+				// if the word has punctuation at the end, remove it
+				if (word.endsWith(".") || word.endsWith(",") || word.endsWith(";") || word.endsWith("!") || word.endsWith("?") || word.endsWith(":")) {
+					word = word.substring(0, word.length() - 1);
+				}
+				if (wordTable.contains(word)){
+					wordTable.replace(word, wordTable.get(word) + 1);
+				} else {
+					//wordTable.put(word, 1);
+				}
 			}
+			inputStream.close();
+			//print each word and number of occurrences
 		}
-		inputStream.close();
-		//print each word and number of occurrences
+		
+		
 	}
 
 }
