@@ -40,6 +40,7 @@ public class HashTable {
 	 */
 	public boolean contains(String key) {
 		int hashCode = getHashCode(key);
+		hashCode = hashCode % size;
 		
 		if(table[hashCode] == null){
 			table[hashCode] = new LinkedList();
