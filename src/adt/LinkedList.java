@@ -45,7 +45,7 @@ public class LinkedList {
 
 		// Checks the list to see if a word exists as a key in the list.
 		while (currentNode != null) {
-			if (currentNode.getKey() == word) {
+			if (currentNode.getKey().equals(word)) {
 				return true;
 			}
 			currentNode = currentNode.getNextNode();
