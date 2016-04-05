@@ -45,18 +45,7 @@ public class HashTable {
 		if(table[hashCode] == null){
 			table[hashCode] = new LinkedList();
 		}
-		Node currentNode = table[hashCode].getHeadNode();
-		
-		while (currentNode != null) {
-
-			if (currentNode.getKey().equals(key)) {
-				return true;
-			}
-
-			currentNode = currentNode.getNextNode();
-		}
-		
-		return false;
+		return table[hashCode].contains(key);
 	}
 
 	public int replace(String key, int value) {
