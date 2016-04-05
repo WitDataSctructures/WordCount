@@ -1,10 +1,11 @@
 /****************************
  * Comp 2071
  * Lab 05 - Hash Tables
- * Due: March 30th, 2016
+ * Due: April 5th, 2016
  * Group #: 12
  * 
- * A node is part of the HashTable. Will be used
+ * A node is part of the LinkedList which is 
+ * part of the HashTable. Will be used
  * to help handle collisions.
  * 
  * @author Jake Mathews
