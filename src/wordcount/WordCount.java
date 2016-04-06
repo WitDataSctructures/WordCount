@@ -28,7 +28,7 @@ import adt.HashTable;
 public class WordCount {
 	
 	private static final int DEFAULT_TABLE_SIZE = 101;
-	private static final String[] INPUT_FILES = {"input1.txt", "american-english-JL.txt",
+	private static final String[] INPUT_FILES = {"american-english-JL.txt", "input1.txt",
 			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables - additional information -- DMR -- 2016-04-03 01.txt",
 			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables -- DMR -- 2015-07-14 01.txt",
 			"the-lancashire-cotton-famine.txt",
