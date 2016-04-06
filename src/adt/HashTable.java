@@ -33,6 +33,29 @@ public class HashTable {
 	}
 
 	/**
+	 * Returns the size of the table.
+	 * @return size
+	 * 		returns the size of the table.
+	 */
+	public int getSize(){
+		return size;
+	}
+	
+	/**
+	 * Returns the sum of the entries found in the table.
+	 * @return sum
+	 */
+	public int getEntryCount(){
+		int sum = 0;
+		
+		for(int i = 0; i < size; i++){
+			sum += table[i].getNumberOfEntries();
+		}
+		
+		return sum;
+	}
+	
+	/**
 	 * Checks if a provided String already exists as a key in the HashTable.
 	 * 
 	 * @param key
@@ -55,7 +78,7 @@ public class HashTable {
 			Node currentNode = table[hashCode].getHeadNode();
 
 			while (currentNode != null) {
-				if (currentNode.getKey() == key) {
+				if (currentNode.getKey().equals(key)) {
 					currentNode.setValue(value);
 					return value;
 				}
@@ -73,7 +96,7 @@ public class HashTable {
 
 			while (currentNode != null) {
 
-				if (currentNode.getKey() == key) {
+				if (currentNode.getKey().equals(key)) {
 					return currentNode.getValue();
 				}
 				currentNode = currentNode.getNextNode();
@@ -124,6 +147,12 @@ public class HashTable {
 		return unicodeSum;
 	}
 
+	/**
+	 * Calculates whether the number provided is prime and if not, finds the next prime number. 
+	 * @param num
+	 * @return primeHunter
+	 * 			
+	 */
 	public int getNextPrime(int num) {
 
 		// checks to see if current number is a prime. If it is, return the number
@@ -145,7 +174,12 @@ public class HashTable {
 		}
 		return primeHunter;
 	}
-
+	
+	/**
+	 * Retrieve the arraylist of all of the keys found in the hashTable.
+	 * @return ArrayList<String>
+	 * 			an arraylist consisting of all of the keys found in the hashTable.
+	 */
 	public ArrayList<String> getKeys() {
 
 		ArrayList<String> keys = new ArrayList<String>();
@@ -166,7 +200,12 @@ public class HashTable {
 		// Collections.reverse(keys);
 		return keys;
 	}
-
+	
+	/**
+	 * Returns a String consisting of the the keys with their designated values.
+	 * @return String
+	 * 			consists of all of the keys paired with their values
+	 */
 	@Override
 	public String toString() {
 		String result = "";
@@ -194,7 +233,10 @@ public class HashTable {
 
 		return result;
 	}
-
+	
+	/**
+	 * Clears the HashTable.
+	 */
 	public void clear() {
 		for (int i = 0; i < size; i++) {
 			table[i].clear();
