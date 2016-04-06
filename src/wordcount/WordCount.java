@@ -62,7 +62,7 @@ public class WordCount {
 				//Gets next word, making all letters lowercase and removing characters that are not letters
 				String word = inputStream.next().trim().toLowerCase().replaceAll("[^\\x61-\\x7A]", "");
 				if (wordTable.contains(word)){
-					Integer count = (Integer) wordTable.get(word);
+					int count = wordTable.get(word);
 					count++;
 					wordTable.replace(word, count);
 				} else {
