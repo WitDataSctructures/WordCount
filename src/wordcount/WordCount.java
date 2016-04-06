@@ -34,10 +34,15 @@ public class WordCount {
 			"the-lancashire-cotton-famine.txt",
 			"wit-attendance-policy.txt"};
 
+	/**
+	 * Reads the sample files counts the number of each word and prints results to the console
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Scanner inputStream;
 		String inputFilePath = null;
 		int hashTableSize;
+		double finalSize, finalEntryCount, loadFactor;
 		
 		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
 		//If the user enters an invalid size for the hash table set it to the default
@@ -76,8 +81,14 @@ public class WordCount {
 			for (String word : words){
 				System.out.println(word + " " + wordTable.get(word));
 			}
+			//Calculate and display statistics
+			finalSize = wordTable.getSize();
+			finalEntryCount = wordTable.getEntryCount();
+			loadFactor = finalEntryCount / finalSize;
+			System.out.println("Size: " + finalSize);
+			System.out.println("Entry Count: " + wordTable.getEntryCount());
+			System.out.println("Load Factor: " + loadFactor);
 		}
-		
 		
 	}
 
