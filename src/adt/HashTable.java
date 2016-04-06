@@ -55,7 +55,7 @@ public class HashTable {
 			Node currentNode = table[hashCode].getHeadNode();
 
 			while (currentNode != null) {
-				if (currentNode.getKey() == key) {
+				if (currentNode.getKey().equals(key)) {
 					currentNode.setValue(value);
 					return value;
 				}
@@ -73,7 +73,7 @@ public class HashTable {
 
 			while (currentNode != null) {
 
-				if (currentNode.getKey() == key) {
+				if (currentNode.getKey().equals(key)) {
 					return currentNode.getValue();
 				}
 				currentNode = currentNode.getNextNode();
