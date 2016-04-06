@@ -1,7 +1,7 @@
 /****************************
  * Comp 2071
  * Lab 05 - Hash Tables
- * Due: April 5th, 2016
+ * Due: April 6th, 2016
  * Group #: 12
  * 
  * A Hashtable is made up of an array of LinkedLists.
@@ -21,24 +21,41 @@ public class LinkedList {
 	private Node head;
 	private int numberOfEntries;
 
+	/**
+	 * Default Constructor for a Linked List.
+	 */
 	public LinkedList() {
 		tail = null;
 		head = null;
 		numberOfEntries = 0;
 	}
 
+	/**
+	 * @return the first node in a Linked List.
+	 */
 	public Node getHeadNode() {
 		return head;
 	}
 
+	/**
+	 * @return the last node in a Linked List.
+	 */
 	public Node getTailNode() {
 		return tail;
 	}
 
+	/**
+	 * @return a count of all of the unique entries entered into the Linked List.
+	 */
 	public int getNumberOfEntries() {
 		return numberOfEntries;
 	}
 
+	/**
+	 * Determines whether or not a specified word exists as a key in the LinkedList
+	 * @param word
+	 * @return boolean on whether it exists or not
+	 */
 	public boolean contains(String word) {
 
 		Node currentNode = head;
@@ -53,6 +70,11 @@ public class LinkedList {
 		return false;
 	}
 
+	/**
+	 * Adds a specified word and value to the Linked List.
+	 * @param word
+	 * @param value
+	 */
 	public void add(String word, int value) {
 
 		// If the word did not already exist in the LinkedList, add it to the end of the list
@@ -75,6 +97,11 @@ public class LinkedList {
 		numberOfEntries++;
 	}
 
+	/**
+	 * Removes a key from the Linked List given the key provided.
+	 * @param word
+	 * @return boolean on the success of the remove.
+	 */
 	public boolean remove(String word) {
 
 		boolean success = false;
@@ -105,6 +132,9 @@ public class LinkedList {
 		return success;
 	}
 
+	/**
+	 * Clears the Linked List
+	 */
 	public void clear() {
 		tail = null;
 		head = null;

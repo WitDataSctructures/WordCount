@@ -23,6 +23,11 @@ public class Tester {
 
 	private static boolean somethingWrong = false;
 
+	/**
+	 * The main method for the Tester class. Determines the results for all of the tests for the methods
+	 * and prints out the results into the console.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Tester test = new Tester(10);
 
@@ -55,6 +60,10 @@ public class Tester {
 	private HashTable myHash;
 	private final int INITIAL_SIZE;
 
+	/**
+	 * Constructor for the Tester class.
+	 * @param size
+	 */
 	public Tester(int size) {
 		INITIAL_SIZE = size;
 		System.out.println("Creating two tables. Each with a size of ");
@@ -195,26 +204,49 @@ public class Tester {
 		return true;
 	}
 
+	/**
+	 * Adds a key and value to both the Java HashTable and our HashTable
+	 * @param key
+	 * @param value
+	 */
 	private void addToBoth(String key, int value) {
 		hash.put(key, value);
 		myHash.put(key, value);
 	}
-
+	
+	/**
+	 * Clears both the Java HashTable and our HashTable.
+	 */
 	private void clearBoth() {
 		hash.clear();
 		myHash.clear();
 	}
 
+	/**
+	 * Removes a key from both the Java HashTable and our HashTable.
+	 * @param key
+	 */
 	private void removeFromBoth(String key) {
 		hash.remove(key);
 		myHash.remove(key);
 	}
 
+	/**
+	 * Replaces a key with a specified value in both the Java HashTable and our HashTable.
+	 * @param key
+	 * @param value
+	 */
 	private void replaceBoth(String key, int value) {
 		hash.replace(key, value);
 		myHash.replace(key, value);
 	}
 
+	/**
+	 * Compares the Java HashTable with our HashTable and returns a boolean on whether or not the two are equivalent.
+	 * @param result1
+	 * @param result2
+	 * @return boolean
+	 */
 	private boolean areTheSame(String result1, String result2) {
 		String[] r1_ = result1.trim().replaceAll("\\{", "").replaceAll(" ", "").split(",");
 		ArrayList<String> r1 = new ArrayList<String>();

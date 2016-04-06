@@ -1,7 +1,7 @@
 /****************************
  * Comp 2071
  * Lab 05 - Hash Tables
- * Due: April 5th, 2016
+ * Due: April 6th, 2016
  * Group #: 12
  * 
  * A Key/Value hash table where the key is always an
@@ -22,7 +22,11 @@ public class HashTable {
 	private int size;
 	private LinkedList[] table;
 
-	// Constructor
+	/**
+	 * Constructor for a HashTable. Makes sure the size of the HashTable is prime.
+	 * @param s
+	 * 		desired size of the HashTable
+	 */
 	public HashTable(int s) {
 		if (s > 1) {
 			size = getNextPrime(s);
@@ -71,6 +75,12 @@ public class HashTable {
 		return table[hashCode].contains(key);
 	}
 
+	/**
+	 * Replaces a given key in the HashTable with the provided value
+	 * @param key
+	 * @param value
+	 * @return new value for the key, 0 if no change made
+	 */
 	public int replace(String key, int value) {
 		if (contains(key)) {
 			int hashCode = getHashCode(key);
@@ -88,6 +98,11 @@ public class HashTable {
 		return 0;
 	}
 
+	/**
+	 * Gets the value from the provided key within a HashTable.
+	 * @param key
+	 * @return value
+	 */
 	public int get(String key) {
 		if (contains(key)) {
 			int hashCode = getHashCode(key);
@@ -105,6 +120,12 @@ public class HashTable {
 		return 0;
 	}
 
+	/**
+	 * Adds a specified key and value to the HashTable.
+	 * @param key
+	 * @param value
+	 * @return value
+	 */
 	public int put(String key, int value) {
 
 		int hashCode = getHashCode(key);
@@ -118,6 +139,12 @@ public class HashTable {
 		return value;
 	}
 
+	/**
+	 * Removes an element from the HashTable.
+	 * @param key
+	 * @return boolean
+	 * 			whether or not the remove was successful.
+	 */
 	public boolean remove(String key) {
 
 		if (contains(key)) {
