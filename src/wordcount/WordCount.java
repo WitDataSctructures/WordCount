@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import adt.HashTable;
@@ -26,16 +27,13 @@ import adt.HashTable;
 //import adt.HashTable;
 
 public class WordCount {
-	
+
 	private static final int DEFAULT_TABLE_SIZE = 101;
-	private static final String[] INPUT_FILES = {"american-english-JL.txt", "input1.txt",
-			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables - additional information -- DMR -- 2016-04-03 01.txt",
-			"Comp 2071 - 2016-1sp -- Project 5 - Hash Tables -- DMR -- 2015-07-14 01.txt",
-			"the-lancashire-cotton-famine.txt",
-			"wit-attendance-policy.txt"};
+	private static final String[] INPUT_FILES = { "american-english-JL.txt", "input1.txt", "Comp 2071 - 2016-1sp -- Project 5 - Hash Tables - additional information -- DMR -- 2016-04-03 01.txt", "Comp 2071 - 2016-1sp -- Project 5 - Hash Tables -- DMR -- 2015-07-14 01.txt", "the-lancashire-cotton-famine.txt", "wit-attendance-policy.txt" };
 
 	/**
 	 * Reads the sample files counts the number of each word and prints results to the console
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -43,19 +41,19 @@ public class WordCount {
 		String inputFilePath = null;
 		int hashTableSize;
 		double finalSize, finalEntryCount, loadFactor;
-		
+
 		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
-		//If the user enters an invalid size for the hash table set it to the default
-		if (hashTableSize < 1){
+		// If the user enters an invalid size for the hash table set it to the default
+		if (hashTableSize < 1) {
 			hashTableSize = DEFAULT_TABLE_SIZE;
 		}
-		
-		while (inputFilePath == null){
+
+		while (inputFilePath == null) {
 			// Show dialog confirming the file name of the input file with the user
 			inputFilePath = JOptionPane.showInputDialog("Enter the path of the input files:", "");
 		}
-		
-		for (String fileName : INPUT_FILES){
+
+		for (String fileName : INPUT_FILES) {
 			HashTable wordTable = new HashTable(hashTableSize);
 			try {
 				inputStream = new Scanner(new FileInputStream(inputFilePath + fileName), "UTF-8");
@@ -63,25 +61,31 @@ public class WordCount {
 				JOptionPane.showMessageDialog(null, "Error: file, " + inputFilePath + fileName + " not found.");
 				return;
 			}
-			while (inputStream.hasNext()){
-				//Gets next word, making all letters lowercase and removing characters that are not letters
+			while (inputStream.hasNext()) {
+				// Gets next word, making all letters lowercase and removing characters that are not letters
 				String word = inputStream.next().trim().toLowerCase().replaceAll("[^\\x61-\\x7A]", "");
-				if (wordTable.contains(word)){
+				if (wordTable.contains(word)) {
 					int count = wordTable.get(word);
 					count++;
 					wordTable.replace(word, count);
 				} else {
 					wordTable.put(word, 1);
 				}
+				finalSize = wordTable.getSize();
+				finalEntryCount = wordTable.getEntryCount();
+				loadFactor = finalEntryCount / finalSize;
+				if (loadFactor > 1.0) {
+					// Resize hashtable
+				}
 			}
 			inputStream.close();
-			//print each word and number of occurrences
+			// print each word and number of occurrences
 			List<String> words = wordTable.getKeys();
 			System.out.println("\nWords in " + fileName + ":");
-			for (String word : words){
+			for (String word : words) {
 				System.out.println(word + " " + wordTable.get(word));
 			}
-			//Calculate and display statistics
+			// Calculate and display statistics
 			finalSize = wordTable.getSize();
 			finalEntryCount = wordTable.getEntryCount();
 			loadFactor = finalEntryCount / finalSize;
@@ -89,7 +93,7 @@ public class WordCount {
 			System.out.println("Entry Count: " + wordTable.getEntryCount());
 			System.out.println("Load Factor: " + loadFactor);
 		}
-		
+
 	}
 
 }
