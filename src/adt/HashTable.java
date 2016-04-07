@@ -34,6 +34,9 @@ public class HashTable {
 			size = 1;
 		}
 		table = new LinkedList[size];
+		for(int i = 0; i < size; i++){
+			table[i] = new LinkedList();
+		}
 	}
 
 	/**
@@ -181,15 +184,19 @@ public class HashTable {
 	 * 			
 	 */
 	public int getNextPrime(int num) {
-
+		
 		// checks to see if current number is a prime. If it is, return the number
-		for (int i = 2; i < num; i++) {
+		boolean isPrime = false;
+		for (int i = 2; i < num-1; i++) {
 			if (num % i != 0) {
-				return num;
+				isPrime = true;
 			}
 		}
+		if(isPrime){
+			return num;
+		}
 
-		boolean isPrime = false;
+		
 		int primeHunter = num + 1;
 		// Retrieves next prime number following num.
 		while (isPrime == false) {
@@ -267,6 +274,48 @@ public class HashTable {
 	public void clear() {
 		for (int i = 0; i < size; i++) {
 			table[i].clear();
+		}
+	}
+
+	/**
+	 * Changes the size to a desired parameter.
+	 * @param newSize
+	 */
+	public void setSize(int newSize){
+		size = getNextPrime(newSize);
+	}
+	
+	/**
+	 * Resizes the table to a parameterized size.
+	 * @param newSize
+	 */
+	public void resize(int newSize){
+		
+		//Create a copy of the current table.
+		LinkedList[] temp = new LinkedList[size];
+		for(int i = 0; i < size; i++){
+			temp[i] = table[i];
+		}
+		
+		//Change the size to the new desired size and change the table's size to meet this.
+		setSize(newSize);
+		table = new LinkedList[size];
+		for(int i = 0; i < size; i++){
+			if (table[i] == null) {
+				table[i] = new LinkedList();
+			}
+		}
+		
+		//Implement elements from old table into the new table.
+		int hashCode = 0;
+		Node currentNode = new Node();
+		for(int i = 0; i < temp.length; i++){
+			currentNode = temp[i].getHeadNode();
+			while(temp[i] != null){
+				hashCode = getHashCode(currentNode.getKey());
+				table[hashCode].add(currentNode.getKey(), currentNode.getValue()); 
+				currentNode = currentNode.getNextNode();
+			}
 		}
 	}
 }
