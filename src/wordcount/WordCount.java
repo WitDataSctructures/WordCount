@@ -89,6 +89,7 @@ public class WordCount {
 			finalSize = wordTable.getSize();
 			finalEntryCount = wordTable.getEntryCount();
 			loadFactor = finalEntryCount / finalSize;
+			System.out.println("\n----Hash Table Metrics----");
 			System.out.println("Size: " + finalSize);
 			System.out.println("Entry Count: " + wordTable.getEntryCount());
 			System.out.println("Load Factor: " + loadFactor);
