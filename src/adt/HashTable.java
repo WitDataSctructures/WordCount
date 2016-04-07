@@ -328,4 +328,28 @@ public class HashTable {
 		}
 		return nullBucketCount;
 	}
+	
+	public int getMinBucketSize(){
+		int minSize = Integer.MAX_VALUE;
+		
+		for(int i = 0; i < size; i++){
+			if (table[i].getNumberOfEntries() < minSize){
+				minSize = table[i].getNumberOfEntries();
+			}
+		}
+		
+		return minSize;
+	}
+	
+	public int getMaxBucketSize(){
+		int maxSize = 0;
+		
+		for(int i = 0; i < size; i++){
+			if (table[i].getNumberOfEntries() > maxSize){
+				maxSize = table[i].getNumberOfEntries();
+			}
+		}
+		
+		return maxSize;
+	}
 }

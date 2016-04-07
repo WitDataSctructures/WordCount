@@ -93,7 +93,7 @@ public class WordCount {
 			// Calculate and display statistics
 			finalSize = wordTable.getSize();
 			finalEntryCount = wordTable.getEntryCount();
-			loadFactor = finalEntryCount / finalSize;
+			loadFactor = finalEntryCount / finalSize; //Same as average bucket size
 			usedBuckets = finalSize - wordTable.getNumOfNullBuckets();
 			usedBucketPercent = (usedBuckets / finalSize) * 100;
 			System.out.println("\n----Hash Table Metrics----");
@@ -102,6 +102,9 @@ public class WordCount {
 			System.out.println("Load Factor: " + loadFactor);
 			System.out.println("Used Buckets: " + usedBuckets);
 			System.out.println("Percentage of Buckets used: " + usedBucketPercent + "%");
+			System.out.println("Minimum Bucket Size: " + wordTable.getMinBucketSize());
+			System.out.println("Maximum Bucket Size: " + wordTable.getMaxBucketSize());
+			System.out.println("Average Bucket Size: " + loadFactor);
 		}
 
 	}
