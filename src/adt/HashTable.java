@@ -318,4 +318,13 @@ public class HashTable {
 			}
 		}
 	}
+	
+	public int getNumOfNullBuckets(){
+		int nullBucketCount = 0;
+		for (int i=0; i < size; i++){
+			if (table[i].getHeadNode() == null){
+				nullBucketCount++;
+			}
+		}
+		return nullBucketCount;
 }
