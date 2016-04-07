@@ -40,7 +40,7 @@ public class WordCount {
 		Scanner inputStream;
 		String inputFilePath = null;
 		int hashTableSize;
-		double finalSize, finalEntryCount, loadFactor;
+		double finalSize, finalEntryCount, loadFactor, usedBuckets, usedBucketPercent;
 
 		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
 		// If the user enters an invalid size for the hash table set it to the default
@@ -71,12 +71,17 @@ public class WordCount {
 				} else {
 					wordTable.put(word, 1);
 				}
-				finalSize = wordTable.getSize();
-				finalEntryCount = wordTable.getEntryCount();
-				loadFactor = finalEntryCount / finalSize;
-				if (loadFactor > 1.0) {
-					// Resize hashtable
+				try{
+					finalSize = wordTable.getSize();
+					finalEntryCount = wordTable.getEntryCount();
+					loadFactor = finalEntryCount / finalSize;
+					if (loadFactor > 1.0) {
+						// Resize hashtable
+					}
+				} catch (NullPointerException e){
+					
 				}
+				
 			}
 			inputStream.close();
 			// print each word and number of occurrences
@@ -89,10 +94,14 @@ public class WordCount {
 			finalSize = wordTable.getSize();
 			finalEntryCount = wordTable.getEntryCount();
 			loadFactor = finalEntryCount / finalSize;
+			usedBuckets = finalSize - wordTable.getNumOfNullBuckets();
+			usedBucketPercent = (usedBuckets / finalSize) * 100;
 			System.out.println("\n----Hash Table Metrics----");
 			System.out.println("Size: " + finalSize);
 			System.out.println("Entry Count: " + wordTable.getEntryCount());
 			System.out.println("Load Factor: " + loadFactor);
+			System.out.println("Used Buckets: " + usedBuckets);
+			System.out.println("Percentage of Buckets used: " + usedBucketPercent + "%");
 		}
 
 	}
