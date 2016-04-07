@@ -327,4 +327,5 @@ public class HashTable {
 			}
 		}
 		return nullBucketCount;
+	}
 }
