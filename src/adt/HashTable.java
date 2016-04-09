@@ -178,35 +178,44 @@ public class HashTable {
 	}
 
 	/**
+	 * Checks whether or not the given number is prime.
+	 * @param n
+	 * @return boolean
+	 * 			true if prime, false if not
+	 */
+	public boolean isPrime(int n) {
+	    for(int i=2;2*i<n;i++) {
+	        if(n%i==0)
+	            return false;
+	    }
+	    return true;
+	}
+	
+	/**
 	 * Calculates whether the number provided is prime and if not, finds the next prime number. 
 	 * @param num
 	 * @return primeHunter
-	 * 			
+	 * 			either num if it is prime or the following prime number
 	 */
 	public int getNextPrime(int num) {
 		
 		// checks to see if current number is a prime. If it is, return the number
-		boolean isPrime = false;
-		for (int i = 2; i < num-1; i++) {
-			if (num % i != 0) {
-				isPrime = true;
-			}
-		}
-		if(isPrime){
+		boolean primeCheck = isPrime(num);
+		
+		if(primeCheck){
 			return num;
 		}
+		else{
 
-		
-		int primeHunter = num + 1;
-		// Retrieves next prime number following num.
-		while (isPrime == false) {
-			for (int i = 2; i < primeHunter; i++) {
-				if (primeHunter % i != 0) {
-					isPrime = true;
-				}
+			// Retrieves next prime number following num.
+			int primeHunter = num;
+			primeCheck = false;
+			while (!primeCheck) {
+				primeHunter++;
+				primeCheck = isPrime(primeHunter);
 			}
-		}
 		return primeHunter;
+		}
 	}
 	
 	/**
@@ -319,6 +328,10 @@ public class HashTable {
 		}
 	}
 	
+	/**
+	 * @return nullBucketCount
+	 * 		the total number of buckets in the array which are equal to null.
+	 */
 	public int getNumOfNullBuckets(){
 		int nullBucketCount = 0;
 		for (int i=0; i < size; i++){
@@ -329,6 +342,10 @@ public class HashTable {
 		return nullBucketCount;
 	}
 	
+	/**
+	 * @return minSize
+	 * 			the minimum bucket size found in the array
+	 */
 	public int getMinBucketSize(){
 		int minSize = Integer.MAX_VALUE;
 		
@@ -341,6 +358,10 @@ public class HashTable {
 		return minSize;
 	}
 	
+	/**
+	 * @return maxSize
+	 * 			the maximum bucket size found in the array
+	 */
 	public int getMaxBucketSize(){
 		int maxSize = 0;
 		
