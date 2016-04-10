@@ -75,7 +75,7 @@ public class WordCount {
 					currentSize = wordTable.getSize();
 					currentEntryCount = wordTable.getEntryCount();
 					loadFactor = currentEntryCount / currentSize;
-					if (loadFactor > 1.0) {
+					if (loadFactor > 1.0 && currentEntryCount > (hashTableSize / 1.5)) {
 						hashTableSize = wordTable.getNextPrime(hashTableSize + 1);
 						wordTable.resize(hashTableSize);
 					}
