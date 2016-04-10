@@ -322,6 +322,7 @@ public class HashTable {
 			currentNode = temp[i].getHeadNode();
 			while(temp[i] != null){
 				hashCode = getHashCode(currentNode.getKey());
+				hashCode %= size;
 				table[hashCode].add(currentNode.getKey(), currentNode.getValue()); 
 				currentNode = currentNode.getNextNode();
 			}

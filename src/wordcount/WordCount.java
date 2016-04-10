@@ -40,7 +40,7 @@ public class WordCount {
 		Scanner inputStream;
 		String inputFilePath = null;
 		int hashTableSize;
-		double finalSize, finalEntryCount, loadFactor, usedBuckets, usedBucketPercent;
+		double currentSize, currentEntryCount, finalSize, finalEntryCount, loadFactor, usedBuckets, usedBucketPercent;
 
 		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
 		// If the user enters an invalid size for the hash table set it to the default
@@ -72,14 +72,14 @@ public class WordCount {
 					wordTable.put(word, 1);
 				}
 				try{
-					finalSize = wordTable.getSize();
-					finalEntryCount = wordTable.getEntryCount();
-					loadFactor = finalEntryCount / finalSize;
+					currentSize = wordTable.getSize();
+					currentEntryCount = wordTable.getEntryCount();
+					loadFactor = currentEntryCount / currentSize;
 					if (loadFactor > 1.0) {
-						// Resize hashtable
+						hashTableSize = wordTable.getNextPrime(hashTableSize + 1);
+						wordTable.resize(hashTableSize);
 					}
-				} catch (NullPointerException e){
-					
+				} catch (NullPointerException e){	
 				}
 				
 			}
