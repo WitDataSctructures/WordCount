@@ -28,7 +28,7 @@ import adt.HashTable;
 
 public class WordCount {
 
-	private static final int DEFAULT_TABLE_SIZE = 101;
+	private static final int DEFAULT_TABLE_SIZE = 499;
 	private static final String[] INPUT_FILES = { "american-english-JL.txt", "input1.txt", "Comp 2071 - 2016-1sp -- Project 5 - Hash Tables - additional information -- DMR -- 2016-04-03 01.txt", "Comp 2071 - 2016-1sp -- Project 5 - Hash Tables -- DMR -- 2015-07-14 01.txt", "the-lancashire-cotton-famine.txt", "wit-attendance-policy.txt" };
 
 	/**
@@ -39,10 +39,15 @@ public class WordCount {
 	public static void main(String[] args) {
 		Scanner inputStream;
 		String inputFilePath = null;
-		int hashTableSize;
-		double currentSize, currentEntryCount, finalSize, finalEntryCount, loadFactor, usedBuckets, usedBucketPercent;
+		int hashTableSize, currentSize;
+		double currentEntryCount, finalSize, finalEntryCount, loadFactor, usedBuckets, usedBucketPercent;
 
-		hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
+		try{
+			hashTableSize = Integer.parseInt(JOptionPane.showInputDialog("Enter a size for the hash table:", DEFAULT_TABLE_SIZE));
+		} catch (NumberFormatException | NullPointerException e){
+			hashTableSize = DEFAULT_TABLE_SIZE;
+		}
+		
 		// If the user enters an invalid size for the hash table set it to the default
 		if (hashTableSize < 1) {
 			hashTableSize = DEFAULT_TABLE_SIZE;
@@ -75,9 +80,9 @@ public class WordCount {
 					currentSize = wordTable.getSize();
 					currentEntryCount = wordTable.getEntryCount();
 					loadFactor = currentEntryCount / currentSize;
-					if (loadFactor > 1.0 && currentEntryCount > (hashTableSize / 1.5)) {
-						hashTableSize = wordTable.getNextPrime(hashTableSize + 1);
-						wordTable.resize(hashTableSize);
+					if (loadFactor > 1.0 && currentEntryCount > (currentSize / 1.5)) {
+						currentSize = wordTable.getNextPrime(currentSize * 13);
+						wordTable.resize(currentSize);
 					}
 				} catch (NullPointerException e){	
 				}
