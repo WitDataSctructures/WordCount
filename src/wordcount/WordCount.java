@@ -77,10 +77,11 @@ public class WordCount {
 					wordTable.put(word, 1);
 				}
 				try{
+					//Calculate load factor and resize if needed
 					currentSize = wordTable.getSize();
 					currentEntryCount = wordTable.getEntryCount();
 					loadFactor = currentEntryCount / currentSize;
-					if (loadFactor > 1.0 && currentEntryCount > (currentSize / 1.5)) {
+					if (loadFactor > 1.0) {
 						currentSize = wordTable.getNextPrime(currentSize * 13);
 						wordTable.resize(currentSize);
 					}
