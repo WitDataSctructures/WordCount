@@ -49,7 +49,7 @@ public class WordCount {
 		}
 		
 		// If the user enters an invalid size for the hash table set it to the default
-		if (hashTableSize < 1) {
+		if (hashTableSize <= 1) {
 			hashTableSize = DEFAULT_TABLE_SIZE;
 		}
 
